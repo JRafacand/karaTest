@@ -28,10 +28,10 @@ Feature: Creación de Usuario en Swagger Petstore
     * if (responseStatus == 404) karate.log('User not found')
     Examples:
       |username|
-      |User1003|
-      |User1005|
-      |User1006|
-      |User1007|
+      |User1008|
+      |User1009|
+      |User1010|
+      |User1011|
 
   Scenario Outline: Actualizar Usuario
     Given path '/user/<username>'
@@ -48,7 +48,18 @@ Feature: Creación de Usuario en Swagger Petstore
     * if (responseStatus == 400) karate.log('Invalid user supplied')
     Examples:
       |username|firstName|newemail                |
-      |User1003|1003User |1003user@hotmail.com    |
+      |User1008|1008User |1008user@hotmail.com    |
+
+  Scenario Outline: Buscar Usuario usuario actualizado
+    Given path '/user/<username>'
+    When method get
+    Then if (responseStatus == 200) karate.log('Usuario encontrado correctamente')
+    * if (responseStatus== 500) karate.log('Servidor no responde')
+    * if (responseStatus == 400) karate.log('Invalid user supplied')
+    * if (responseStatus == 404) karate.log('User not found')
+    Examples:
+      |username|
+      |1008User|
 
   Scenario Outline: Delete Usuario
     Given path '/user/<username>'
@@ -58,6 +69,6 @@ Feature: Creación de Usuario en Swagger Petstore
     * if (responseStatus == 404) karate.log('User not found')
     Examples:
       |username|
-      |User1003|
+      |User1008|
 
 
